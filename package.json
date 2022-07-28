@@ -1,7 +1,7 @@
 {
-  "name": "ens-subgraph",
+  "name": "xns-subgraph",
   "version": "1.0.2",
-  "repository": "https://github.com/ensdomains/ens-subgraph",
+  "repository": "https://github.com/yodaplus/xns-subgraph",
   "license": "MIT",
   "scripts": {
     "codegen": "graph codegen --output-dir src/types/",
@@ -15,11 +15,15 @@
     "docker:remove-local": "graph remove graphprotocol/ens --node http://ens-app_graph-node_1:8020",
     "build": "graph build",
     "deploy": "graph deploy ensdomains/ens --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
-    "watch-local": "graph deploy graphprotocol/ens --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
+    "watch-local": "graph deploy graphprotocol/ens --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001",
+    "setup-remote": "npm run codegen && npm run create-remote && npm run deploy-remote",
+    "create-remote": "graph create --node https://graph-node.yodaplus.net:8020/ xnsdomains/xns-mainnet",
+    "remove-remote": "graph remove --node https://graph-node.yodaplus.net:8020/ xnsdomains/xns-mainnet",
+    "deploy-remote": "graph deploy --node https://graph-node.yodaplus.net:8020/ --ipfs https://graph-node.yodaplus.net:5001 xnsdomains/xns-mainnet"
   },
   "devDependencies": {
     "@ensdomains/content-hash": "^2.5.3",
-    "@graphprotocol/graph-cli": "^0.23.2",
-    "@graphprotocol/graph-ts": "^0.23.1"
+    "@graphprotocol/graph-cli": "^0.21.1",
+    "@graphprotocol/graph-ts": "^0.20.1"
   }
 }
